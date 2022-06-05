@@ -1,0 +1,14 @@
+server {
+        listen 80;
+        server_name YOUR_DOMAIN;
+        location / {
+                proxy_pass http://127.0.0.1:YOUR_PORT;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+}
+# You can also change proxy_pass to your other IP addresses.
+# proxy_set_header stuffs are datas that are bypassed through to your servers.
+# with NodeJS and cloudflare in front of the X-Real-IP sometimes breaks.
